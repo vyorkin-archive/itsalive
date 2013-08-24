@@ -1,4 +1,14 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in itsalive.gemspec
 gemspec
+
+group :test, :development do
+  gem 'wrong', :git => 'git@github.com:vyorkin/wrong.git'
+  gem 'pre-commit'
+  gem 'rubocop'
+end
+
+group :test do
+  gem 'coveralls', :require => false
+  gem 'simplecov', :require => false
+end
