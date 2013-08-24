@@ -1,4 +1,4 @@
-its-alive
+itsalive
 =========
 
 Simple neural network implementation
