@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/vyorkin/itsalive/badge.png)](https://coveralls.io/r/vyorkin/itsalive)
+
 # Itsalive
 
 TODO: Write a gem description
