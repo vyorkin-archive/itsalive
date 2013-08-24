@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "itsalive"
   spec.version       = Itsalive::VERSION
   spec.authors       = ["Vasiliy Yorkin"]
-  spec.email         = ["vyorkin@undev.ru"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.email         = ["vasiliy.yorkin@gmail.com"]
+  spec.description   = %q{Simple neural network implementation}
+  spec.summary       = %q{Yet another neural network}
+  spec.homepage      = "http://github.com/vyorkin/itsalive"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest"
 end
