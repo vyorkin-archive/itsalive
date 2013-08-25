@@ -1,12 +1,12 @@
 require 'itsalive/version'
-require 'itsalive/synapse'
 require 'itsalive/neuron'
+require 'itsalive/activation'
 require 'itsalive/layer'
 require 'itsalive/network'
 
 module ItsAlive
-  autoload :Synapse, 'itsalive/synapse'
   autoload :Neuron, 'itsalive/neuron'
+  autoload :Activation, 'itsalive/activation'
   autoload :Layer, 'itsalive/layer'
   autoload :Network, 'itsalive/network'
 end
