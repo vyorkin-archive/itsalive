@@ -5,6 +5,8 @@ require 'itsalive/activation'
 require 'itsalive/randomizer'
 require 'itsalive/synapse'
 require 'itsalive/neuron'
+require 'itsalive/input_neuron'
+require 'itsalive/output_neuron'
 require 'itsalive/layer'
 require 'itsalive/network'
 
@@ -15,6 +17,8 @@ module ItsAlive
   autoload :Randomizer, 'itsalive/randomizer'
   autoload :Synapse, 'itsalive/synapse'
   autoload :Neuron, 'itsalive/neuron'
+  autoload :InputNeuron, 'itsalive/input_neuron'
+  autoload :OutputNeuron, 'itsalive/output_neuron'
   autoload :Layer, 'itsalive/layer'
   autoload :Network, 'itsalive/network'
 end
