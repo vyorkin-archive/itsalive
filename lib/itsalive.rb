@@ -1,12 +1,20 @@
 require 'itsalive/version'
-require 'itsalive/neuron'
+require 'itsalive/defaults'
+require 'itsalive/error'
 require 'itsalive/activation'
+require 'itsalive/randomizer'
+require 'itsalive/synapse'
+require 'itsalive/neuron'
 require 'itsalive/layer'
 require 'itsalive/network'
 
 module ItsAlive
-  autoload :Neuron, 'itsalive/neuron'
+  autoload :Defaults, 'itsalive/defaults'
+  autoload :Error, 'itsalive/error'
   autoload :Activation, 'itsalive/activation'
+  autoload :Randomizer, 'itsalive/randomizer'
+  autoload :Synapse, 'itsalive/synapse'
+  autoload :Neuron, 'itsalive/neuron'
   autoload :Layer, 'itsalive/layer'
   autoload :Network, 'itsalive/network'
 end
