@@ -19,7 +19,11 @@ module ItsAlive
       neuron.signal([1, 2, 3]).activate
 
       output = neuron.output_values
-      expected = [0.09168273035060777, 0.18336546070121554, 0.27504819105182327]
+      expected = [
+        0.09168273035060777,
+        0.18336546070121554,
+        0.27504819105182327
+      ]
 
       assert { output == expected }
     end
