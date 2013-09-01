@@ -4,17 +4,18 @@ module ItsAlive
   class Settings
     include Singleton
 
-    attr_accessor :neuron_threshold, :activation_function
-    attr_writer :random
+    attr_accessor :neuron_threshold,
+                  :activation_function,
+                  :weight_function
 
     def initialize
       @neuron_threshold = Defaults::THRESHOLD
-      @activation_function = Activation::SIGMOID
-      @random = Randomizer::DEFAULT
+      @activation_function = ActivationFunctions::SIGMOID
+      @weight_function = WeightFunctions::RANDOM
     end
 
-    def random(*args)
-      @random.call(*args)
+    def self.weight(*args)
+      Settings.instance.weight_function.call(*args)
     end
   end
 end

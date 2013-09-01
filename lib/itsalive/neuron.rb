@@ -19,8 +19,8 @@ module ItsAlive
       @pontential, @output = 0, 0
     end
 
-    def link_to(target)
-      link = Synapse.new(self, target)
+    def link_to(target, weight = nil)
+      link = Synapse.new(self, target, weight)
       @axon_synapses << link
       target.dendrites << link
       self
@@ -36,9 +36,7 @@ module ItsAlive
     def activate
       @potential = @dendrites.map(&:output).inject(&:+)
       @output = @activation.call(@potential + @threshold)
-      propagate
-
-      @output
+      transmit
     end
 
     def output_values
@@ -47,12 +45,13 @@ module ItsAlive
 
     private
 
-    def propagate
+    def transmit
       if @axon_synapses.any?
         @axon_synapses.each { |synapse|
           synapse.signal(@output)
         }
       end
+      @output
     end
 
     alias_method :inputs, :dendrites

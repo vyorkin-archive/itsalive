@@ -17,7 +17,7 @@ module ItsAlive
 
     def initialize(source, target, weight = nil)
       @source, @target = source, target
-      @weight = weight || Settings.instance.random
+      @weight = weight || Settings.weight
     end
 
     def signal(val)
