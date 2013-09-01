@@ -26,20 +26,37 @@ module ItsAlive
       self
     end
 
-    def activate(values)
-      @dendrites.zip(values) do |dendrite, value|
+    def signal(values)
+      @dendrites.zip(values) { |dendrite, value|
         dendrite.signal(value)
-      end
+      }
+      self
+    end
 
+    def activate
       @potential = @dendrites.map(&:output).inject(&:+)
       @output = @activation.call(@potential + @threshold)
+      propagate
+
+      @output
+    end
+
+    def output_values
+      @axon_synapses.map(&:output)
     end
 
     private
 
+    def propagate
+      if @axon_synapses.any?
+        @axon_synapses.each { |synapse|
+          synapse.signal(@output)
+        }
+      end
+    end
+
     alias_method :inputs, :dendrites
     alias_method :outputs, :axon_synapses
     alias_method :connect_to, :link_to
-    alias_method :squash, :activate
   end
 end

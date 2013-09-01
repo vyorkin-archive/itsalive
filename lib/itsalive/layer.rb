@@ -1,19 +1,5 @@
 module ItsAlive
   class Layer
-    class << self
-      def input(size, inputs = 1)
-        Layer.new(Array.new(size) { InputNeuron.new(inputs) })
-      end
-
-      def hidden(size)
-        Layer.new(Array.new(size) { Neuron.new })
-      end
-
-      def output(size, outputs = 1)
-        Layer.new(Array.new(size) { OutputNeuron.new(outputs) })
-      end
-    end
-
     attr_accessor :next, :previous
     attr_reader :neurons, :error
 
@@ -24,13 +10,18 @@ module ItsAlive
 
     def link_to(layer)
       @next = layer
-      layer.next = self
+      layer.previous = self
 
       @neurons.product(layer.neurons) do |source, target|
         source.link_to(target)
       end
 
       self
+    end
+
+    def propagate
+      @neurons.map(&:activate)
+      @next.propagate if @next
     end
 
     def length
