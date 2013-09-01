@@ -35,4 +35,6 @@ module ItsAlive
 
     alias_method :connect_to, :link_to
   end
+
+  HiddenLayer = Layer
 end

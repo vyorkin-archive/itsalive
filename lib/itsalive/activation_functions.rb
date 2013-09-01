@@ -1,5 +1,5 @@
 module ItsAlive
-  module Activation
+  module ActivationFunctions
     LINEAR = -> (x) { x }
     LINEAR_DERIVATIVE = -> (x) { 1 }
 

@@ -2,14 +2,19 @@ require_relative '../minitest_helper'
 
 module ItsAlive
   class LayerTest < Minitest::Test
-    def test_that_it_creates_neurons
-      layer = Layer.hidden(4)
-      assert { layer.neurons.length == 4 }
+    def setup
+      @weights = (0.1..1.0).step(0.01).to_a
+      @synapse_index = 0
+      @weight_function = -> {
+        weight = @weights[@synapse_index]
+        @synapse_index += 1
+        weight
+      }
     end
 
     def test_that_it_correctly_links_to_layer
-      input = Layer.input(3, 3)
-      output = Layer.output(2)
+      input = InputLayer.new(3, 3)
+      output = OutputLayer.new(2)
 
       input.link_to(output)
 
@@ -22,6 +27,22 @@ module ItsAlive
         outbound == expected &&
         inbound == expected
       }
+    end
+
+    def test_that_it_propagates_to_next_layer
+      Settings.stub :weight, @weight_function do
+        input = InputLayer.new(3, 3)
+        output = OutputLayer.new(2)
+
+        input.link_to(output)
+        input.signal([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        input.propagate
+
+        actual = output.output_values
+        expected = [0.8305988329309042, 0.8344946489754106]
+
+        assert { actual == expected }
+      end
     end
 
     private

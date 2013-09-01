@@ -4,10 +4,14 @@ module ItsAlive
       super(Array.new(size) { OutputNeuron.new(outputs) })
     end
 
-    def outputs
-      @neurons.map { |neuron|
-        neuron.axon_synapses.map(&:output)
-      }.flatten
+    def axon_synapses
+      @neurons.map(&:axon_synapses).flatten
     end
+
+    def output_values
+      axon_synapses.map(&:output)
+    end
+
+    alias_method :outputs, :axon_synapses
   end
 end

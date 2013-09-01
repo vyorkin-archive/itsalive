@@ -7,7 +7,6 @@ module ItsAlive
       assert { neuron.axon_synapses.length == 1 }
     end
 
-
     def test_that_it_activates_using_default_sigmoid_function
       neuron = create_neuron(3, 0)
       neuron.signal([1, 2, 3])
@@ -15,7 +14,7 @@ module ItsAlive
       assert { neuron.activate == 0.9168273035060777 }
     end
 
-    def test_that_it_propagates_output_signal_to_its_axon_synapses
+    def test_that_it_transmits_output_signal_to_its_axon_synapses
       neuron = create_neuron(3, 3)
       neuron.signal([1, 2, 3]).activate
 
@@ -32,7 +31,9 @@ module ItsAlive
 
       weight = -> (index) {
         number = index + 1
-        block_given? ? yield(number) : (number / 10.0)
+        block_given? ?
+          yield(number) :
+          number / 10.0
       }
 
       dendrites = Array.new(inputs) { |i|
