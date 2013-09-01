@@ -10,6 +10,8 @@ require 'itsalive/neuron'
 require 'itsalive/input_neuron'
 require 'itsalive/output_neuron'
 require 'itsalive/layer'
+require 'itsalive/input_layer'
+require 'itsalive/output_layer'
 require 'itsalive/network'
 
 module ItsAlive
@@ -24,5 +26,7 @@ module ItsAlive
   autoload :InputNeuron, 'itsalive/input_neuron'
   autoload :OutputNeuron, 'itsalive/output_neuron'
   autoload :Layer, 'itsalive/layer'
+  autoload :InputLayer, 'itsalive/input_layer'
+  autoload :OutputLayer, 'itsalive/output_layer'
   autoload :Network, 'itsalive/network'
 end
