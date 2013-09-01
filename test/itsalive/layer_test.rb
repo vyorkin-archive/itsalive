@@ -3,21 +3,24 @@ require_relative '../minitest_helper'
 module ItsAlive
   class LayerTest < Minitest::Test
     def test_that_it_creates_neurons
-      layer = Layer.new(4, Neuron)
-      assert { layer.neurons.lenght == 4 }
+      layer = Layer.hidden(4)
+      assert { layer.neurons.length == 4 }
     end
 
     def test_that_it_correctly_links_to_layer
-      input_layer = Layer.input(3)
-      output_layer = Layer.output(2)
+      input = Layer.input(3, 3)
+      output = Layer.output(2)
 
-      inbound = links_for(input_layer, true)
-      outbound = links_for(output_layer, false)
-      expected = input_layer.length * output_layer.length
+      input.link_to(output)
+
+      outbound = links_for(input, false)
+      inbound = links_for(output, true)
+
+      expected = input.length * output.length
 
       assert {
-        inbound == expected &&
-        outbound == expected
+        outbound == expected &&
+        inbound == expected
       }
     end
 
