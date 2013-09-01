@@ -10,13 +10,18 @@ module ItsAlive
 
     def link_to(layer)
       @next = layer
-      layer.next = self
+      layer.previous = self
 
       @neurons.product(layer.neurons) do |source, target|
         source.link_to(target)
       end
 
       self
+    end
+
+    def propagate
+      @neurons.map(&:activate)
+      @next.propagate if @next
     end
 
     def length

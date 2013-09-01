@@ -1,8 +1,13 @@
 module ItsAlive
   class Synapse
     class << self
-      def input_to(target) Synapse.new(nil, target) end
-      def output_from(source) Synapse.new(source, nil) end
+      def input_to(target, weight = nil)
+        Synapse.new(nil, target, weight)
+      end
+
+      def output_from(source, weight = 1.0)
+        Synapse.new(source, nil, weight)
+      end
 
       alias_method :receptor_to, :input_to
     end
@@ -10,9 +15,9 @@ module ItsAlive
     attr_reader :source, :target
     attr_reader :weight, :output
 
-    def initialize(source, target, weight = Randomizer::DEFAULT.call)
+    def initialize(source, target, weight = nil)
       @source, @target = source, target
-      @weight = weight
+      @weight = weight || Settings.instance.random
     end
 
     def signal(val)

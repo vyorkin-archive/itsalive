@@ -2,35 +2,50 @@ require_relative '../minitest_helper'
 
 module ItsAlive
   class NeuronTest < Minitest::Test
-    def test_that_it_can_link_from_neuron
-     neuron = Neuron.new.link_from(Neuron.new)
-     assert { neuron.dendrites.length == 1 }
-    end
-
-    def test_that_it_can_link_from_synapse
-     neuron = Neuron.new.link_from(Synapse.new(nil, nil))
-     assert { neuron.dendrites.length == 1 }
-    end
-
-    def test_that_it_can_link_to_neuron
+    def test_that_it_links_to_neuron
       neuron = Neuron.new.link_to(Neuron.new)
       assert { neuron.axon_synapses.length == 1 }
     end
 
-    def test_that_it_can_link_to_synapse
-      neuron = Neuron.new.link_to(Synapse.new(nil, nil))
-      assert { neuron.axon_synapses.length == 1 }
-    end
 
     def test_that_it_activates_using_default_sigmoid_function
-      neuron = Neuron.new.
-        link_from(Synapse.new(nil, nil, 0.1)).
-        link_from(Synapse.new(nil, nil, 0.2)).
-        link_from(Synapse.new(nil, nil, 0.3))
+      neuron = create_neuron(3, 0)
+      neuron.signal([1, 2, 3])
 
-      signals = [1, 2, 3]
+      assert { neuron.activate == 0.9168273035060777 }
+    end
 
-      assert { neuron.activate(signals) == 0.9168273035060777 }
+    def test_that_it_propagates_output_signal_to_its_axon_synapses
+      neuron = create_neuron(3, 3)
+      neuron.signal([1, 2, 3]).activate
+
+      output = neuron.output_values
+      expected = [0.09168273035060777, 0.18336546070121554, 0.27504819105182327]
+
+      assert { output == expected }
+    end
+
+    private
+
+    def create_neuron(inputs, outputs)
+      neuron = Neuron.new
+
+      weight = -> (index) {
+        number = index + 1
+        block_given? ? yield(number) : (number / 10.0)
+      }
+
+      dendrites = Array.new(inputs) { |i|
+        Synapse.input_to(neuron, weight.call(i))
+      }
+      axon_synapses = Array.new(outputs) { |o|
+        Synapse.output_from(neuron, weight.call(o))
+      }
+
+      neuron.dendrites.concat(dendrites)
+      neuron.axon_synapses.concat(axon_synapses)
+
+      neuron
     end
   end
 end
