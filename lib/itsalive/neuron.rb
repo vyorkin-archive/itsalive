@@ -39,6 +39,11 @@ module ItsAlive
       transmit
     end
 
+    def calculate_delta
+      # TODO: Calculate delta considering this is an interrior neuron,
+      # override this in OutputNeuron
+    end
+
     def output_values
       @axon_synapses.map(&:output)
     end

@@ -28,6 +28,10 @@ module ItsAlive
       assert { output == expected }
     end
 
+    def test_that_it_correctly_calculates_delta_for_interrior_neuron
+      skip
+    end
+
     private
 
     def create_neuron(inputs, outputs)
