@@ -12,6 +12,7 @@ module ItsAlive
     private
 
     def setup(structure)
+      
     end
   end
 end
