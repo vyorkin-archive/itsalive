@@ -15,9 +15,9 @@ module ItsAlive
     UNIT_STEP = -> (x) { x < 0.0 ? 0.0 : 1.0 }
 
     SIGMOID = -> (x) { 1 / (1 + Math.exp(-x)) }
-    SIGMOID_DERIVATIVE = -> (x) { SIGMOID(x) * (1 - SIGMOID(x)) }
+    SIGMOID_DERIVATIVE = -> (x) { SIGMOID.call(x) * (1 - SIGMOID.call(x)) }
 
     HYPERBOLIC_TANH = -> (x) { (Math.exp(2 * x) - 1) * (Math.exp(2 * x) + 1) }
-    HYPERBOLIC_TANH_DERIVATIVE = -> (x) { 1 - HYPERBOLIC_TANH(x) ** 2 }
+    HYPERBOLIC_TANH_DERIVATIVE = -> (x) { 1 - HYPERBOLIC_TANH.call(x) ** 2 }
   end
 end
