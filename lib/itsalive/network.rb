@@ -1,6 +1,7 @@
 module ItsAlive
   class Network
-    attr_accessor :learning_rate, :momentum
+    attr_accessor :learning_rate, :momentum,
+                  :error
 
     def initialize(structure, options = {})
       @learning_rate = options[:learning_rate] || Defaults::LEARNING_RATE
@@ -12,7 +13,11 @@ module ItsAlive
     private
 
     def setup(structure)
-      
+
+    end
+
+    def reset
+      @error = 1
     end
   end
 end
