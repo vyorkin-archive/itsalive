@@ -24,6 +24,10 @@ module ItsAlive
       @next.propagate if @next
     end
 
+    def learn
+      @previous.learn if @previous
+    end
+
     def length
       @neurons.length
     end

@@ -16,7 +16,7 @@ module ItsAlive
       @neurons.zip(desired) { |neuron, value|
         neuron.learn(value)
       }
-      @previous.learn if @previous
+      super
     end
 
     alias_method :outputs, :axon_synapses

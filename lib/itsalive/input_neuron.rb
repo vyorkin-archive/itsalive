@@ -1,5 +1,5 @@
 module ItsAlive
-  class InputNeuron < Neuron
+  class InputNeuron < InterriorNeuron
     def initialize(count = 1, &block)
       super(&block)
       add_inputs(count)

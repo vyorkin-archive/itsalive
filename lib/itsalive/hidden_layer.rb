@@ -2,7 +2,7 @@ module ItsAlive
   class HiddenLayer < Layer
     def learn
       @neurons.map(&:learn)
-      @previous.learn if @previous
+      super
     end
   end
 end
