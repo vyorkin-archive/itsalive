@@ -13,7 +13,9 @@ module ItsAlive
     end
 
     def learn(desired)
-      @neurons.zip(desired) { |neuron, signal| neuron.learn(signal) }
+      @neurons.zip(desired) { |neuron, value|
+        neuron.learn(value)
+      }
       @previous.learn if @previous
     end
 

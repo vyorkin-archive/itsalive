@@ -31,7 +31,7 @@ module ItsAlive
     def test_that_it_correctly_calculates_delta
       output = OutputNeuron.new
 
-      interrior = create_neuron(1, 0).
+      interrior = create_neuron(1, 0, InterriorNeuron).
                   link_to(output, 0.1)
 
       output.signal([1]).activate
@@ -45,8 +45,8 @@ module ItsAlive
 
     private
 
-    def create_neuron(inputs, outputs)
-      neuron = Neuron.new
+    def create_neuron(inputs, outputs, klass = Neuron)
+      neuron = klass.new
 
       weight = -> (index) {
         number = index + 1

@@ -42,27 +42,11 @@ module ItsAlive
       transmit
     end
 
-    def learn
-      calculate_error
-      calculate_delta
-      adjust_weights
-    end
-
     def output_values
       @axon_synapses.map(&:output)
     end
 
     protected
-
-    def calculate_delta
-      @delta = derivative * @error
-    end
-
-    def calculate_error(desired = nil)
-      @error = @axon_synapses.collect { |synapse|
-        synapse.target.delta * synapse.weight
-      }.inject(&:+)
-    end
 
     def adjust_weights
       @axon_synapses.map(&:adjust)

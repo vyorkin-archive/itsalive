@@ -1,5 +1,5 @@
 module ItsAlive
-  class InputLayer < Layer
+  class InputLayer < HiddenLayer
     def initialize(size, inputs = 1)
       super(Array.new(size) { InputNeuron.new(inputs) })
     end
