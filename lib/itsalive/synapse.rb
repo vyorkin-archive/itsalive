@@ -13,19 +13,25 @@ module ItsAlive
     end
 
     attr_reader :source, :target
-    attr_reader :weight, :output
+    attr_reader :weight, :delta, :output
 
     def initialize(source, target, weight = nil)
+      @learning_rate = Settings.instance.learning_rate
+      @momentum = Settings.instance.momentum
+
       @source, @target = source, target
       @weight = weight || Settings.weight
+      @delta, @output = 0, 0
     end
 
     def signal(val)
       @output = @weight * val
     end
 
-    def adjust(delta)
-      @weight += delta
+    def adjust
+      gradient = @source.output * @target.delta
+      @delta = @learning_rate * gradient + @momentum * @delta
+      @weight += @delta
     end
   end
 end

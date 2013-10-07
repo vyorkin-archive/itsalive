@@ -12,6 +12,11 @@ module ItsAlive
       axon_synapses.map(&:output)
     end
 
+    def learn(desired)
+      @neurons.zip(desired) { |neuron, signal| neuron.learn(signal) }
+      @previous.learn if @previous
+    end
+
     alias_method :outputs, :axon_synapses
   end
 end

@@ -29,9 +29,10 @@ module ItsAlive
     end
 
     def test_that_it_correctly_calculates_delta
-      interrior = create_neuron(1, 0)
       output = OutputNeuron.new
-      interrior.link_to(output, 0.1)
+
+      interrior = create_neuron(1, 0).
+                  link_to(output, 0.1)
 
       output.signal([1]).activate
       output.learn(1)

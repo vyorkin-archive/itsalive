@@ -14,6 +14,11 @@ module ItsAlive
       self
     end
 
+    def learn(desired)
+      calculate_error(desired)
+      calculate_delta
+    end
+
     protected
 
     def calculate_delta

@@ -1,7 +1,6 @@
 module ItsAlive
   class Network
-    attr_accessor :learning_rate, :momentum,
-                  :error
+    attr_reader :error
 
     def initialize(structure, options = {})
       @learning_rate = options[:learning_rate] || Defaults::LEARNING_RATE
