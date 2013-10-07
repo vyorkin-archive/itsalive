@@ -13,5 +13,15 @@ module ItsAlive
       count.times { @axon_synapses << Synapse.output_from(self) }
       self
     end
+
+    protected
+
+    def calculate_delta
+      @delta = -derivative * @error
+    end
+
+    def calculate_error(desired = nil)
+      @error = Error::SIGNAL.call(desired, @output)
+    end
   end
 end

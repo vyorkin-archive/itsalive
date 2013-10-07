@@ -4,11 +4,12 @@ module ItsAlive
 
     attr_reader :dendrites, :axon_synapses
     attr_reader :output, :potential
-    attr_accessor :delta
+    attr_accessor :error, :delta
 
     def initialize(&block)
       @threshold = Settings.instance.neuron_threshold
       @activation = Settings.instance.activation_function
+      @activation_derivative = Settings.instance.activation_derivative_function
       reset
       evaluate(&block)
     end
@@ -17,6 +18,8 @@ module ItsAlive
       @dendrites = []
       @axon_synapses = []
       @pontential, @output = 0, 0
+      @delta = 0
+      @error = 1
     end
 
     def link_to(target, weight = nil)
@@ -39,13 +42,29 @@ module ItsAlive
       transmit
     end
 
-    def calculate_delta
-      # TODO: Calculate delta considering this is an interrior neuron,
-      # override this in OutputNeuron
+    def learn(desired = nil)
+      calculate_error(desired)
+      calculate_delta
     end
 
     def output_values
       @axon_synapses.map(&:output)
+    end
+
+    protected
+
+    def calculate_delta
+      @delta = derivative * @error
+    end
+
+    def calculate_error(desired = nil)
+      @error = @axon_synapses.collect { |synapse|
+        synapse.target.delta * synapse.weight
+      }.inject(&:+)
+    end
+
+    def derivative
+      @activation_derivative.call(@output)
     end
 
     private

@@ -28,8 +28,18 @@ module ItsAlive
       assert { output == expected }
     end
 
-    def test_that_it_correctly_calculates_delta_for_interrior_neuron
-      skip
+    def test_that_it_correctly_calculates_delta
+      interrior = create_neuron(1, 0)
+      output = OutputNeuron.new
+      interrior.link_to(output, 0.1)
+
+      output.signal([1]).activate
+      output.learn(1)
+
+      interrior.signal([1]).activate
+      interrior.learn
+
+      assert { interrior.delta == -0.0011854997141506037 }
     end
 
     private

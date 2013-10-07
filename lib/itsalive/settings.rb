@@ -6,11 +6,13 @@ module ItsAlive
 
     attr_accessor :neuron_threshold,
                   :activation_function,
+                  :activation_derivative_function,
                   :weight_function
 
     def initialize
       @neuron_threshold = Defaults::THRESHOLD
       @activation_function = ActivationFunctions::SIGMOID
+      @activation_derivative_function = ActivationFunctions::SIGMOID_DERIVATIVE
       @weight_function = WeightFunctions::RANDOM
     end
 
