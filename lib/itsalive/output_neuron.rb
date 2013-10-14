@@ -25,7 +25,7 @@ module ItsAlive
       @delta = -derivative * @error
     end
 
-    def calculate_error(desired = nil)
+    def calculate_error(desired)
       @error = Error::SIGNAL.call(desired, @output)
     end
   end

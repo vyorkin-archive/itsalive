@@ -13,10 +13,10 @@ module ItsAlive
     end
 
     def learn(desired)
-      @neurons.zip(desired) { |neuron, value|
+      @neurons.zip(desired) do |neuron, value|
         neuron.learn(value)
-      }
-      super
+      end
+      super()
     end
 
     alias_method :outputs, :axon_synapses

@@ -45,6 +45,20 @@ module ItsAlive
       end
     end
 
+    def test_that_it_calls_learn_on_previous_layer
+      neuron = InterriorNeuron.new
+      neuron.stub :learn, 0 do
+        layer = HiddenLayer.new([neuron])
+        mock = Minitest::Mock.new
+        layer.previous = mock
+
+        mock.expect :learn, true
+        layer.learn
+
+        assert { mock.verify }
+      end
+    end
+
     private
 
     def links_for(layer, inbound)
