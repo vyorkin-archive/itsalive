@@ -1,7 +1,7 @@
-require_relative '../minitest_helper'
+require_relative 'neural_test'
 
 module ItsAlive
-  class SynapseTest < Minitest::Test
+  class SynapseTest < NeuralTest
     def test_that_it_has_default_random_weight
       synapse = Synapse.new(nil, nil)
       assert {

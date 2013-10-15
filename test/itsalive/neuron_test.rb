@@ -1,7 +1,7 @@
-require_relative '../minitest_helper'
+require_relative 'neural_test'
 
 module ItsAlive
-  class NeuronTest < Minitest::Test
+  class NeuronTest < NeuralTest
     def test_that_it_links_to_neuron
       neuron = Neuron.new.link_to(Neuron.new)
       assert { neuron.axon_synapses.length == 1 }

@@ -46,6 +46,10 @@ module ItsAlive
       @axon_synapses.map(&:output)
     end
 
+    def output_weights
+      @axon_synapses.map(&:weight)
+    end
+
     protected
 
     def adjust_weights

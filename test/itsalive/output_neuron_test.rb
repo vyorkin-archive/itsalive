@@ -1,7 +1,7 @@
-require_relative '../minitest_helper'
+require_relative 'neural_test'
 
 module ItsAlive
-  class OutputNeuronTest < Minitest::Test
+  class OutputNeuronTest < NeuralTest
     def test_that_it_can_add_outputs
       neuron = OutputNeuron.new(3)
       assert { neuron.outputs.length == 3 }

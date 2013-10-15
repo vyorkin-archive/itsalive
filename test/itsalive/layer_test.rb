@@ -1,17 +1,7 @@
-require_relative '../minitest_helper'
+require_relative 'neural_test'
 
 module ItsAlive
-  class LayerTest < Minitest::Test
-    def setup
-      @weights = (0.1..1.0).step(0.01).to_a
-      @synapse_index = 0
-      @weight_function = -> {
-        weight = @weights[@synapse_index]
-        @synapse_index += 1
-        weight
-      }
-    end
-
+  class LayerTest < NeuralTest
     def test_that_it_correctly_links_to_layer
       input = InputLayer.new(3, 3)
       output = OutputLayer.new(2)

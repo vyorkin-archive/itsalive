@@ -37,6 +37,14 @@ module ItsAlive
       self
     end
 
+    def output_values
+      @neurons.map(&:output_values).flatten
+    end
+
+    def output_weights
+      @neurons.map(&:output_weights).flatten
+    end
+
     alias_method :connect_to, :link_to
   end
 end
